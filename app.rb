@@ -8,7 +8,6 @@ get '/' do
 end
 
 get '/about' do 
-	@error = 'Something Wrong!'
 	erb :about
 end
 
@@ -27,15 +26,18 @@ post '/visit' do
 	@datetime = params[:datetime]
  	@color = params[:color]
 
- 	if @username == ''
- 		@error = 'Введите имя'
- 		return erb :visit
- 	end
+ 	hh = { :username => 'Введите имя',
+ 		   :phone => 'Введите телефон',
+ 		   :datetime => 'Введите дату и время'
+ 	}
 
- 	if @phone == ''
- 		@error = 'Введите телефон'
+ 	hh.each do |key, value|
+ 		if params[key] == ''
+ 		@error = hh[key]
  		return erb :visit
- 	end
+ 		end
+ 	end	
+
 
 
 
