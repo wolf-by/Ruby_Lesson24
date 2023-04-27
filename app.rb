@@ -27,6 +27,18 @@ post '/visit' do
 	@datetime = params[:datetime]
  	@color = params[:color]
 
+ 	if @username == ''
+ 		@error = 'Введите имя'
+ 		return erb :visit
+ 	end
+
+ 	if @phone == ''
+ 		@error = 'Введите телефон'
+ 		return erb :visit
+ 	end
+
+
+
 	f = File.open './public/users.txt', 'a'
 	f.write "Клиент: #{@username}, Телефон: #{@phone}, Парикмахер: #{@master}, Дата и время: #{@datetime}, Цвет краски: #{@color}.\n"
 	f.close
