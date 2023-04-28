@@ -4,11 +4,11 @@
 <form action="/contacts" method="POST">
   <div class="mb-3">
     <label>Ваш email</label>
-    <input name="email" type="text" class="form-control" placeholder="Введите имя">
+    <input name="email" type="text" class="form-control" placeholder="Введите имя" value="<%= @email %>">
   </div>
   <div class="mb-3">
     <label>Сообщение</label>
-    <textarea name="message" type="text" class="form-control" placeholder="Введите сообщение"></textarea>
+    <textarea name="message" type="text" class="form-control" placeholder="Введите сообщение" value='<%= @message %>'></textarea>
   </div>
   </br> 
   <button type="submit" class="btn btn-primary">Отправить</button>

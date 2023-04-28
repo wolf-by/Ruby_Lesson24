@@ -33,13 +33,10 @@ post '/visit' do
 
  	hh.each do |key, value|
  		if params[key] == ''
- 		@error = hh[key]
- 		return erb :visit
+ 			@error = hh[key]
+ 			return erb :visit
  		end
  	end	
-
-
-
 
 	f = File.open './public/users.txt', 'a'
 	f.write "Клиент: #{@username}, Телефон: #{@phone}, Парикмахер: #{@master}, Дата и время: #{@datetime}, Цвет краски: #{@color}.\n"
@@ -51,6 +48,17 @@ end
 post '/contacts' do
 	@email = params[:email]
 	@message = params[:message]
+
+	hh2 = { :email => 'Введите email',
+			:message => 'Введите сообщение'
+	}
+
+	hh2.each do |key, value|
+		if params[key] == ''
+			@error = hh2[key]
+			return erb :contacts
+		end	
+	end	
 	
 	f = File.open './public/contacts.txt', 'a'
 	f.write "Email клиент: #{@email}, Сообщение: #{@message}\n"
