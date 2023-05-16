@@ -2,6 +2,7 @@
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/reloader'
+require 'pony'
 
 get '/' do
 	erb "Hello! <a href=\"https://github.com/bootstrap-ruby/sinatra-bootstrap\">Original</a> pattern has been modified for <a href=\"http://rubyschool.us/\">Ruby School - Labs 24</a>"			
@@ -66,3 +67,26 @@ post '/contacts' do
 
 	erb :contacts
 end
+
+post '/contacts' do 
+
+Pony.mail (
+
+	:to => 'oneit.by@gmail.com', 
+	:subject => 'Barber shop',
+	:body => "Email клиент: #{@email}, Сообщение: #{@message}\n",
+	:via => :smtp,
+	:via_optoins => {
+		:adress => 'smtp.gmail.com',
+		:port => '587',
+		:user_name => 'oneit.by',
+		:password => '',
+		:authentication => :plain, 
+		:domain => 'gmail.com'
+	} 
+)
+
+	erb :contacts
+	
+end
+
