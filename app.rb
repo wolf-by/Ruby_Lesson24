@@ -65,28 +65,22 @@ post '/contacts' do
 	f.write "Email клиент: #{@email}, Сообщение: #{@message}\n"
 	f.close
 
-	erb :contacts
-end
+	#отправка данных страницы contacts на почту 
+	Pony.mail ({
 
-post '/contacts' do 
-
-Pony.mail (
-
-	:to => 'oneit.by@gmail.com', 
+	:to => '@gmail.com', #адрес куда отправить 
 	:subject => 'Barber shop',
 	:body => "Email клиент: #{@email}, Сообщение: #{@message}\n",
 	:via => :smtp,
-	:via_optoins => {
-		:adress => 'smtp.gmail.com',
+	:via_options => {
+		:address => 'smtp.gmail.com',
 		:port => '587',
-		:user_name => 'oneit.by',
-		:password => '',
+		:user_name => '@gmail.com', #ваша почта на gmail, с нее отправка
+		:password => '', #требуется в аккаунте gmail создать - Пароль приложений
 		:authentication => :plain, 
 		:domain => 'gmail.com'
 	} 
-)
+})
 
-	erb :contacts
-	
+	erb "Данные отправлены" 
 end
-
